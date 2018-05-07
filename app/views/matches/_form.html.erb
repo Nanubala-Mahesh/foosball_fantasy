@@ -1,0 +1,77 @@
+<%= form_with(model: match, local: true) do |form| %>
+  <% if match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(match.errors.count, "error") %> prohibited this match from being saved:</h2>
+
+      <ul>
+      <% match.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :team_one %>
+    <%= form.collection_select :team_one, Team.all, :id, :team_name, {prompt: 'select team'}, { id: :match_team_one} %>
+    <span id="teamOneWon"></span>
+  </div>
+
+  <div class="field">
+    <%= form.label :team_two %>
+    <%= form.collection_select :team_two, Team.all, :id, :team_name, {prompt: 'select team'}, { id: :match_team_two} %>
+    <span id="teamTwoWon"></span>
+  </div>
+
+  <div class="field">
+    <%= form.label :who_one %>
+    <%= form.collection_select :who_one, Team.all, :team_name, :team_name, {prompt: 'select team'}, id: :match_who_one %>
+  </div>
+
+  <div class="field">
+    <%= form.label :team_one_score %>
+    <%= form.text_field :team_one_score, id: :match_team_one_score %>
+  </div>
+
+  <div class="field">
+    <%= form.label :team_two_score %>
+    <%= form.number_field :team_two_score, id: :match_team_two_score, :onblur=>"addWon(value)" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript"> 
+  
+
+  function addWon(value) {
+    event.preventDefault()
+
+    var teamOneScore = document.getElementById('match_team_one_score').value;
+    var teamTwoScore = document.getElementById('match_team_two_score').value;
+    var teamOne = document.getElementById('match_team_one');
+    var teamTwo = document.getElementById('match_team_two');
+    var whoWon = document.getElementById('match_who_one');
+    var teamOneWon = document.getElementById('teamOneWon');
+    var teamTwoWon = document.getElementById('teamTwoWon');
+
+    if (teamOneScore != "" && teamOneScore != "") {
+        if (teamOneScore > teamTwoScore) {
+          teamOneWon.innerHTML = 'won the match'
+          // alert("team with id " + teamOne.value + ' won the watch');    
+        } else if (teamTwoScore > teamOneScore ) {
+          teamTwoWon.innerHTML = 'won the match'
+          // alert("team with id " + teamTwo.value + ' won the watch');
+        }      
+    } else {
+      alert('nil');
+    }
+  }
+
+
+
+
+</script>

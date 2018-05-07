@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507035459) do
+ActiveRecord::Schema.define(version: 20180507075125) do
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "team_one"
+    t.integer "team_two"
+    t.integer "who_one"
+    t.integer "team_one_score"
+    t.integer "team_two_score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "team_name"
+    t.string "player_one"
+    t.string "player_two"
+    t.integer "who_won"
+    t.integer "won_percentage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_teams", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

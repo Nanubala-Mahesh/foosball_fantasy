@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Team name:</strong>
+  <%= @team.team_name %>
+</p>
+
+<p>
+  <strong>Player one:</strong>
+  <%= User.find_by(id: @team.player_one).first_name %>
+</p>
+
+<p>
+  <strong>Player two:</strong>
+  <%= User.find_by(id: @team.player_two).first_name %>
+</p>
+
+<p>
+  <strong>Won percentage:</strong>
+  <%= @team.won_percentage %>
+</p>
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>
