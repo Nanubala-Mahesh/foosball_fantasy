@@ -7,6 +7,7 @@ end
 
 gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'faker', '~> 1.8', '>= 1.8.7'
+gem 'pry-rails', '~> 0.3.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'

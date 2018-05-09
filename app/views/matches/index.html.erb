@@ -17,9 +17,9 @@
   <tbody>
     <% @matches.each do |match| %>
       <tr>
-        <td><%= match.team_one %></td>
-        <td><%= match.team_two %></td>
-        <td><%= match.who_one %></td>
+        <td><%= find_team( match.team_one) %></td>
+        <td><%= find_team( match.team_two) %></td>
+        <td><%= find_team( match.who_one) %></td>
         <td><%= match.team_one_score %></td>
         <td><%= match.team_two_score %></td>
         <td><%= link_to 'Show', match %></td>

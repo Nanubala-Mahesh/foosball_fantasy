@@ -26,13 +26,22 @@ class MatchesController < ApplicationController
   def create
     @match = Match.new(match_params)
     
+    binding.pry
     respond_to do |format|
-      if @match.save
-        format.html { redirect_to @match, notice: 'Match was successfully created.' }
-        format.json { render :show, status: :created, location: @match }
+      team1 = Team.find_by(:id => @match.team_one )
+      team2 = Team.find_by(:id => @match.team_two )
+      if @team1.try(:won_percentage) != 100 || @team2.try(:won_percentage) != 100
+
+        if @match.save
+          format.html { redirect_to @match, notice: 'Match was successfully created.' }
+          format.json { render :show, status: :created, location: @match }
+        else
+          format.html { render :new }
+          format.json { render json: @match.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @match.errors, status: :unprocessable_entity }
+        team1.try(:won_percentage) == 100 ? team1 : team2
+        render :new, notice: 'cannot be created'
       end
     end
   end
